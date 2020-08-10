@@ -43,18 +43,18 @@ public class ConnectedCityServiceImpl implements ConnectedCityService {
 		}
 	}
 
-	public List<String> getConnectedCities(String source, String destination,List<String> citysRoutes) {
+	public List<String> getConnectedCities(String source, String destination,List<String> cityRoutes) {
 
 		List<String> childResult = getCities().stream().map(map -> map.getCityRoot(source))
-				.filter(destObj -> (Objects.nonNull(destObj)) && !citysRoutes.contains(destObj)) 
+				.filter(destObj -> (Objects.nonNull(destObj)) && !cityRoutes.contains(destObj)) 
 				.collect(Collectors.toList());
 
-		citysRoutes.addAll(childResult);
+		cityRoutes.addAll(childResult);
 
 		if(!childResult.contains(destination))
-			childResult.forEach(str-> getConnectedCities(str, destination, citysRoutes)); 
+			childResult.forEach(str-> getConnectedCities(str, destination, cityRoutes)); 
 
-		return citysRoutes;
+		return cityRoutes;
 	}
 
 	public List<City> getCities() {
