@@ -43,37 +43,37 @@ public class ConnectedCityServiceImpl implements ConnectedCityService {
 		}
 	}
 
-	public List<String> getConnectedCities(String source, String destination,List<String> citiesRoots) {
+	public List<String> getConnectedCities(String source, String destination,List<String> citysRoutes) {
 
-		List<String> childResult = getCites().stream().map(map -> map.getCityRoot(source))
-				.filter(destObj -> (Objects.nonNull(destObj)) && !citiesRoots.contains(destObj)) 
+		List<String> childResult = getCities().stream().map(map -> map.getCityRoot(source))
+				.filter(destObj -> (Objects.nonNull(destObj)) && !citysRoutes.contains(destObj)) 
 				.collect(Collectors.toList());
 
-		citiesRoots.addAll(childResult);
+		citysRoutes.addAll(childResult);
 
 		if(!childResult.contains(destination))
-			childResult.forEach(str-> getConnectedCities(str, destination, citiesRoots)); 
+			childResult.forEach(str-> getConnectedCities(str, destination, citysRoutes)); 
 
-		return citiesRoots;
+		return citysRoutes;
 	}
 
-	public List<City> getCites() {
+	public List<City> getCities() {
 
-		List<City> citylist = new ArrayList<>();
+		List<City> cityList = new ArrayList<>();
 
 		try {
-			citylist = new ArrayList<>();
+			cityList = new ArrayList<>();
 			Path path = Paths.get(getClass().getClassLoader().getResource(cityFilePath).toURI());
-			citylist =Files.readAllLines(path).stream().
+			cityList =Files.readAllLines(path).stream().
 					filter(s -> !s.trim().isEmpty())
 					.map(line -> line.split(",|/n"))
 					.map(a -> new City(a[0], a[1]))
 					.collect(Collectors.toList());
 		} catch (IOException | URISyntaxException e) {
-			appLogger.error("Exception in ConnectedCityServiceImpl:getCites",e);
+			appLogger.error("Exception in ConnectedCityServiceImpl:getCities",e);
 		} 
 
-		return citylist;
+		return cityList;
 	}
 
 }
