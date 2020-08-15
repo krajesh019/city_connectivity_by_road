@@ -10,6 +10,6 @@ https://github.com/krajesh019/city_connectivity_by_road
 6.	Test cases written in Junit.
 7.	Application can be tested with below URL.
     http://localhost:8080/connected?origin=city1&destination=city2
-8   Access the swagger UI with the below link.
+8.  Access the swagger UI with the below link.
     http://localhost:8080/swagger-ui.html
 
