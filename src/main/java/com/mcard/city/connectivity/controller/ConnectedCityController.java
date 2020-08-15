@@ -24,12 +24,15 @@ public class ConnectedCityController {
 	private ConnectedCityService connectedCityService;
 
 	@GetMapping("/connected")
-	public ResponseEntity<String> getRoadConnectivity(@RequestParam(value = "origin", defaultValue = "") String origin,
+	public ResponseEntity<String> getRoadConnectivity(@RequestParam(value = "origin",  defaultValue = "") String origin,
 			@RequestParam(value = "destination", defaultValue = "") String destination) {
 
 		HttpHeaders responseHeaders = getRestHeader();
 
 		try {
+			if(origin.isEmpty() || destination.isEmpty() ) {
+				return new ResponseEntity<>("no",responseHeaders, HttpStatus.OK);
+			}				
 			appLogger.info("Start processing the request", origin, destination);
 			return new ResponseEntity<>(connectedCityService.isCityConnected(origin.trim(), destination.trim()) ? "yes" : "no",
 					responseHeaders, HttpStatus.OK);

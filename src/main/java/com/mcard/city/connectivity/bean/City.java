@@ -16,6 +16,10 @@ public class City {
 		this.destination = to; 
 	}
 
+	public City() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getCityRoot(String citypath) {
 
 		return citypath.equalsIgnoreCase(this.destination.trim()) ? origin.trim() : citypath.equalsIgnoreCase(this.origin.trim()) ? destination.trim() : null;
