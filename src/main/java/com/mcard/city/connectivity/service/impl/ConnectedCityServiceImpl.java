@@ -33,7 +33,6 @@ public class ConnectedCityServiceImpl implements ConnectedCityService {
 	public boolean isCityConnected(String origin,String destination) {
 
 		List<String>  connectedRoads = new ArrayList<>();
-		connectedRoads.add(origin);
 
 		connectedRoads = getConnectedCities(origin, destination, connectedRoads);
 
@@ -65,9 +64,6 @@ public class ConnectedCityServiceImpl implements ConnectedCityService {
 
 		if(!childResult.contains(destination))
 			childResult.forEach(origin-> getConnectedCities(origin, destination, cityRoutes)); 
-
-		if(childResult.isEmpty())
-			cityRoutes.clear();
 
 		return cityRoutes;
 	}
